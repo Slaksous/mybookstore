@@ -4,7 +4,7 @@
     <div class="form-row">
         <div class="form-item">
             <label>Title</label>
-            <input type="text" name="title" value="<%= searchOptions.title %>">
+            <input autocomplete="off" type="text" name="title" value="<%= searchOptions.title %>">
         </div>
     </div>
     <div class="form-row">
@@ -25,9 +25,5 @@
 <br>
 
 <div>
-    <% books.forEach(book => { %>
-        <a href="/books/<%= book.id %>">
-            <img height="150", width="100" src="<%= book.coverImagePath %>">
-        </a>
-    <% }) %> 
+    <%- include('../partials/bookGrid', {books: books, large: true}) %>
 </div>

@@ -50,6 +50,7 @@ router.post('/', async (req, res) => {
         const newBook = await book.save();
         res.redirect(`books/${newBook.id}`)
     } catch (err) { 
+        console.log(err);
         renderNewPage(res, book, true);
     }
 });
@@ -150,15 +151,13 @@ async function renderFormPage(res, book, form, hasError = false) {
 }
 
 function saveCover(book, coverEncoded) {
-    if(coverEncoded == null ) return;
-
-    const cover = JSON.parse(coverEncoded);
-    if(cover != null &&  imageMimeTypes.includes(cover.type)) {
-        book.coverImage = new Buffer.from(cover.data, 'base64');
-        book.coverImageType = cover.type
+    if (coverEncoded == null) return
+    const cover = JSON.parse(coverEncoded)
+    if (cover != null && imageMimeTypes.includes(cover.type)) {
+      book.coverImage = new Buffer.from(cover.data, 'base64')
+      book.coverImageType = cover.type
     }
-
-}
+  }
 // Functions End==================================================
 
 module.exports = router;
